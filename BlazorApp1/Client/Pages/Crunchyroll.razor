@@ -1,0 +1,38 @@
+﻿@page "/crunchyroll"
+
+@using BlazorApp1.Shared.Models.Crunchyroll
+@using BlazorApp1.Client.Services;
+
+@inject ICrunchyrollService cs
+
+
+
+<PageTitle>Crunchyroll</PageTitle>
+
+
+@if (Animes is not null)
+{
+    <div class="row">
+        @foreach (var a in Animes)
+        {
+            <div class="col-lg-3 col-md-3 col-sm-8 g-3">
+                <div class="card w-100">
+                    <h5 class="card-title text-center mt-3">@a.Name</h5>
+                    <div class="card-body">
+                        <img class="card-img-top" src="@a.ImageUrl" alt="Card image cap">
+                    </div>
+                    <div class="card-footer">
+                        <small class="text-muted">Rating: @a.Tags</small>
+                    </div>
+                    <div class="card-footer">
+                        <small class="text-muted">Rating: @a.Rating</small>
+                    </div>
+                </div>
+            </div>
+        }
+    </div>
+}
+
+
+
+

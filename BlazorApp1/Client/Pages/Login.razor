@@ -1,0 +1,41 @@
+﻿@page "/Login"
+@using BlazorApp1.Client.Services;
+@using BlazorApp1.Shared.Models;
+@inject IDiscordServices ds
+
+@inject NavigationManager nm
+
+<PageTitle>Login</PageTitle>
+
+<h1>Hello, world!</h1>
+
+<AuthorizeView>
+    <Authorized>
+
+        <button class="btn btn-danger" onclick="@GetUserID">Get User ID</button>
+        <button class="btn btn-danger" onclick="@GetUser">Get User</button>
+
+        <p>UserID: @UserID</p>
+        @if (User is not null)
+        {
+            <p>User Name: @User.Username</p>
+        }
+    </Authorized>
+
+</AuthorizeView>
+
+@code {
+    public string UserID { get; set; }
+    public User User { get; set; }
+
+    public async Task GetUserID()
+    {
+        UserID = await ds.GetUserID();
+    }
+
+    public async Task GetUser()
+    {
+        User = await ds.GetUserAsync("248882444005015552");
+        UserID = User.Id.ToString();
+    }
+}
